@@ -74,7 +74,8 @@ def window2(root, bar_num):
 bars_len = []
 def fetch2(entries2):   # fetch entered bar lengths
     global bars_len
-    bar_len = entries2
+    for entry in entries2:
+        bars_len.append(int(entry.get()))
 
 print("Thanks. We will now need more information")
 root = tk.Tk()
@@ -85,3 +86,46 @@ q_button = tk.Button(root, text='Next', command=root.quit)
 s_button.pack(side=tk.LEFT, padx=5, pady=5)
 q_button.pack(side=tk.LEFT, padx=5, pady=5)
 root.mainloop()
+
+# create flexibility matrix
+flex_mat = np.zeros((int(bar_num), int(bar_num)))
+for i in range(int(bar_num)):
+    flex_mat[i][i] = bars_len[i]
+
+# Step 3: ask for tension vectors
+def window3(root, bar_num):
+    entries3 = []
+    for i in range(1, int(bar_num)+1):
+        row = tk.Frame(root)
+        text = "Bar" + str(i)
+        lab = tk.Label(row, width=15, text=text, anchor='w')
+        for j in range(int(redun)+1):
+            ent = tk.Entry(row)
+            if j == 0:
+                fill = "Loaded Tensions"
+            else:
+                fill = "Self Stress" + str(j)
+            ent.insert(0, fill)
+            ent.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X)
+            entries3.append(ent)
+        row.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
+        lab.pack(side=tk.LEFT)
+    return entries3
+tensions = []
+def fetch3(entries3):   # fetch entered bar lengths
+    global tensions
+    for entry in entries3:
+        tensions.append(int(entry.get()))
+
+print("Thanks. We are almost there.")
+root = tk.Tk()
+root.title("Enter Bar Tensions")
+ents = window3(root, bar_num)
+s_button = tk.Button(root, text='Store', command=(lambda e=ents: fetch3(e)))
+q_button = tk.Button(root, text='Next', command=root.quit)
+s_button.pack(side=tk.LEFT, padx=5, pady=5)
+q_button.pack(side=tk.LEFT, padx=5, pady=5)
+root.mainloop()
+# split tensions by bar : [load tension, self stress 1, self stress 2, ...]
+n = int(redun) + 1
+tensions = [tensions[i * n:(i + 1) * n] for i in range((len(tensions) + n - 1) // n )] 
