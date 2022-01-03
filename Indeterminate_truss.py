@@ -128,4 +128,13 @@ q_button.pack(side=tk.LEFT, padx=5, pady=5)
 root.mainloop()
 # split tensions by bar : [load tension, self stress 1, self stress 2, ...]
 n = int(redun) + 1
-tensions = [tensions[i * n:(i + 1) * n] for i in range((len(tensions) + n - 1) // n )] 
+tensions = [tensions[i * n:(i + 1) * n] for i in range((len(tensions) + n - 1) // n )]
+t_0 = []
+s_all = [[]*int(redun)]
+for i in range(len(tensions)):
+    t_0.append(tensions[i][0])
+    for j in range(int(redun)):
+        s_all[j][i] = tensions[i][j]
+
+print(t_0)
+print(s_all)
