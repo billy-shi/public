@@ -29,4 +29,3 @@ dataset['validation'] = np.where(dataset['location'] == dataset['areaName'], Tru
 # to manually check area name misfit
 # print(dataset.loc[dataset['validation']==False])
 
-# dataset ready

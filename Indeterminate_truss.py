@@ -135,6 +135,3 @@ for i in range(len(tensions)):
     t_0.append(tensions[i][0])
     for j in range(int(redun)):
         s_all[j][i] = tensions[i][j]
-
-print(t_0)
-print(s_all)
