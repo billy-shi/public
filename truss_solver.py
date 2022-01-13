@@ -49,6 +49,6 @@ assert len(l) == bars_num, "Sorry, values entered are invalid"
 F = np.diag(l)
 
 # calculate extensions
-load_e = F*t
+load_e = F.dot(t)
 print(load_e)
 self_e = [0]*bars_num
