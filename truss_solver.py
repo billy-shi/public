@@ -50,5 +50,9 @@ F = np.diag(l)
 
 # calculate extensions
 load_e = F.dot(t)
-print(load_e)
-self_e = [0]*bars_num
+self_e = []
+for vec in s:
+    self_e.append(F.dot(vec))
+
+# carry out compatibility calculations
+np.dot()
