@@ -12,6 +12,7 @@ Date: Feb 1, 2022
 
 import random
 import numpy as np
+from scipy.integrate import quad
 
 def gaussian_optimize(mean, sd, bounds, x):
     """
@@ -30,19 +31,17 @@ def gaussian_optimize(mean, sd, bounds, x):
     """
     
     # calculate proportion outside bounds
-    gaussian(x)
+    return gaussian_cumulative(0.01)
 
-def gaussian(x, mean, sd):
+def gaussian_cumulative(z):
     """
-    gaussian distribution function
-    
-    :param x: values to consider distributions
-    :type x: list
-    :param mean: mean value of a gaussian distribution
-    :type mean: float
-    :param sd: standard deviation
-    :type sd: float
+    gaussian cumulative probability function
     """
+    def f(x):
+        return np.exp(-0.5 * x**2)
+    res, err = quad(f, 1e-9, z)
+    res = res/np.sqrt(2*np.pi) + 0.5
+    err = err/np.sqrt(2*np.pi)
+    return [res, err]
 
-    p_density = (np.pi*sd) * np.exp(-0.5*((x-mean)/sd)**2)
-    return p_density
+print(gaussian_cumulative(1)[0])
