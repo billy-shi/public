@@ -13,9 +13,12 @@ import random
 import numpy
 import matplotlib.pyplot as plt
 
-def main():
-    """
-    Main execution function with terminal interface
-    """
+from probability_calc import gaussian_optimize
 
-    menu = input("Click enter to view ")
+class Probability:
+    def __init__(self, mean, sd):
+        self.mean = mean
+        self.sd = sd
+
+    def gaussian(self):
+        
