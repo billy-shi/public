@@ -16,8 +16,9 @@ import matplotlib.pyplot as plt
 from probability_calc import gaussian_optimize
 
 class Probability:
-    def __init__(self):
-        self.number = 2
+    def __init__(self, mean, sd):
+        self.mean = mean
+        self.sd = sd
 
     def gaussian(self):
         
